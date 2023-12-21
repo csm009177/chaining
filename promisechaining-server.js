@@ -6,34 +6,30 @@ const jsonPath = "name.json";
 const xhrPath = "xhr.js";
 
 const serv = http.createServer((req, res) => {
+  if (req.method === "GET" && req.url === "/") {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
-      console.log("첫번째");
-      if (req.method === "GET" && req.url === "/") {
         // Read the join.html file
         fs.readFile(htmlPath, "utf8", (err, data) => {
           // Set response header and send the file content
           res.writeHead(200, { "Content-Type": "text/html" });
           res.end(data);
         });
-      }
       resolve();
-    }, 3000);
+    }, 1000);
   }).then(() => {
     setTimeout(() => {
-      console.log("두번째");
-      if (req.method === "GET" && req.url === "/") {
-        // Read the join.html file
         fs.readFile(twoPath, "utf8", (err, data) => {
           // Set response header and send the file content
           res.writeHead(200, { "Content-Type": "text/html" });
           res.end(data);
         });
-      }
       resolve();
-    }, 3000);
+    }, 1000);
   });
+  }
 });
+
 // Define port number
 const port = 3212;
 
