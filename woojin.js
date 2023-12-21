@@ -1,21 +1,21 @@
 import http from "http";
 import fs from "fs";
 
-const htmlPath = "index.html";
+const onePath = "one.html";
 const twoPath = "two.html";
 
 const serv = http.createServer((req, res) => {
   new Promise((resolve, reject) => {
     setTimeout(() => {
       if (req.method === "GET" && req.url === "/") {
-        fs.promises.readFile(htmlPath, "utf8")
+        fs.promises.readFile(onePath, "utf8")
           .then((data) => {
             res.writeHead(200, { "Content-Type": "text/html" });
             res.write(data);
             resolve();
           });
       }
-    }, 3000);
+    }, 1000);
   })
   .then(() => {
     setTimeout(() => {
@@ -25,7 +25,7 @@ const serv = http.createServer((req, res) => {
             res.end(data);
           });
       }
-    }, 3000);
+    }, 2000);
   });
 });
 

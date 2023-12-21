@@ -12,7 +12,14 @@ const serv = http.createServer((req, res) => {
       res.writeHead(200, { "Content-Type": "text/html" });
       res.end(data);
     });
-  } })
+  } else if (req.method === 'GET' && req.url === '/component.js') {
+    // Read the userData.json file and send its content as a response
+    fs.readFile(componentPath, 'utf8', (err, component) => {
+        res.writeHead(200, { 'Content-Type': 'application/javascript' });
+        res.end(component);    
+    })
+  }
+});
 // Define port number
 const port = 3210;
 
