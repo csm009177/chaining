@@ -1,25 +1,22 @@
-import http from 'http';
-import fs, { appendFileSync, writeFileSync } from 'fs';
-const htmlPath = 'index.html'
-const jsonPath = 'name.json'
-const xhrPath = 'xhr.js'
+// app.js
+import http from "http";
+import fs, { appendFileSync, writeFileSync } from "fs";
+const htmlPath = "./index.html";
+const componentPath = "./component.js"
 
-const serv = http.createServer((req,res) =>{
-  setTimeout(() => {
-    if (req.method === 'GET' && req.url === '/') {
-      // Read the join.html file
-      fs.readFile(htmlPath, 'utf8', (err, data) => {
-          // Set response header and send the file content
-          res.writeHead(200, { 'Content-Type': 'text/html' });
-          res.end(data);
-      });
-    }
-  }, 5000)
-})
+const serv = http.createServer((req, res) => {
+  if (req.method === "GET" && req.url === "/") {
+    // Read the join.html file
+    fs.readFile(htmlPath, "utf8", (err, data) => {
+      // Set response header and send the file content
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.end(data);
+    });
+  } })
 // Define port number
-const port = 3212;
+const port = 3210;
 
 // Start the server
 serv.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
